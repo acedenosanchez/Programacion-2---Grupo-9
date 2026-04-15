@@ -26,17 +26,17 @@ public class SimpleArrayList<E> implements SimpleList<E> {
     }
 
     @Override
-    public boolean add(Object element) {
+    public boolean add(E element) {
         return false;
     }
 
     @Override
-    public void add(int index, Object element) {
+    public void add(int index, E element) {
 
     }
 
     @Override
-    public Object remove(int index) {
+    public E remove(int index) {
         return null;
     }
 
@@ -56,26 +56,25 @@ public class SimpleArrayList<E> implements SimpleList<E> {
     }
 
     @Override
-    public Object get(int index) {
-        validateIndex(index);
-        return elements[index];
+    public E get(int index) {
+        return null;
     }
 
     @Override
-    public Object set(int index, Object element) {
-        E currentElement = get(index);
-        elements[index]=element;
-        return currentElement;
+    public E set(int index, E element) {
+        return null;
     }
 
     @Override
     public int size() {
-        return size;
+        return 0;
     }
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return false;
     }
 }
+
+
 
