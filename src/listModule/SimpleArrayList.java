@@ -25,7 +25,18 @@ public class SimpleArrayList<E> implements SimpleList<E> {
 
     @Override
     public boolean add(E element) {
-        return false;
+        if (size == elements.length) {
+            E[] newArray = (E[]) new Object[elements.length * 2];
+            for (int i = 0; i < size; i++) {
+                newArray[i] = elements[i];
+            }
+            elements = newArray;
+        }
+
+        elements[size] = e;
+        size++;
+
+        return true;
     }
 
     @Override
@@ -43,7 +54,20 @@ public class SimpleArrayList<E> implements SimpleList<E> {
 
     @Override
     public E remove(int index) {
-        return null;
+        validateIndex(index);
+
+        E removedElement = elements[index];
+
+        for (int i = index; i < size -1; i++) {
+            elements[i] = elements[i+1];
+        }
+
+        elements[size - 1] = null;
+
+        size--;
+
+        return removedElement;
+    }
     }
 
     @Override
