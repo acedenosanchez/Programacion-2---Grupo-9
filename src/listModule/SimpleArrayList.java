@@ -33,7 +33,7 @@ public class SimpleArrayList<E> implements SimpleList<E> {
             elements = newArray;
         }
 
-        elements[size] = e;
+        elements[size] = element;
         size++;
 
         return true;
@@ -67,7 +67,6 @@ public class SimpleArrayList<E> implements SimpleList<E> {
         size--;
 
         return removedElement;
-    }
     }
 
     @Override
@@ -113,22 +112,26 @@ public class SimpleArrayList<E> implements SimpleList<E> {
 
     @Override
     public E get(int index) {
-        return null;
+        validateIndex(index);
+        return elements[index];
     }
 
     @Override
     public E set(int index, E element) {
-        return null;
+        validateIndex(index);
+        E old = elements[index];
+        elements[index] = element;
+        return old;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 }
 
