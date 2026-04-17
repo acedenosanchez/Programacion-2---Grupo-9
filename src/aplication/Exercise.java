@@ -2,7 +2,7 @@ package aplication;
 import java.util.Scanner;
 
 public abstract class Exercise {
-    protected boolean runnig = true;
+    protected boolean running = true;
     protected Scanner scanner = new Scanner(System.in);
 
     //CONSTRUCTOR
@@ -13,7 +13,7 @@ public abstract class Exercise {
 
     //Métodos
     public void run(){
-        while (runnig)
+        while (running)
             exerciseLogic();
         }
 

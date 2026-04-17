@@ -16,6 +16,6 @@ public class TestExercise extends Exercise{
         String userInput = scanner.nextLine().toLowerCase();
 
         if(userInput.equals("mm"))
-            runnig = false; else System.out.println("\n Invalid input, try again...");
+            running = false; else System.out.println("\n Invalid input, try again...");
     }
 }

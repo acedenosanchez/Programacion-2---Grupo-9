@@ -1,8 +1,9 @@
 package aplication;
 import java.util.Scanner;
+import listModule.ListExercise;
 
 public class MainProgram {
-    public boolean running = true;
+    private boolean running = true;
     private Exercise exercise;
 
     public static void main(String[] args) {
@@ -19,24 +20,28 @@ public class MainProgram {
         System.out.println("Program terminated");
     }
 
-    private void selectExercise (Scanner Scanner){
+    private void selectExercise (Scanner scanner){
         System.out.println("\nSelect exercise type: "
         + "\n0: Terminate program."
-        + "\n1: Test exercise");
+        + "\n1: Test exercise"
+        + "\n2: List exercise");
 
-        String userInput = Scanner.nextLine();
+        String userInput = scanner.nextLine();
 
         switch (userInput){
             case "0":
                 running = false;
                 break;
             case "1":
-                exercise = new TestExercise(Scanner);
+                exercise = new TestExercise(scanner);
+                break;
+            case "2":
+                exercise = new ListExercise(scanner);
                 break;
 
             default:
                 System.out.println("\n Invalid input, try again...");
-                selectExercise(Scanner);
+                selectExercise(scanner);
                 break;
         }
     }
