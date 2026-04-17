@@ -8,11 +8,12 @@ import java.util.Scanner;
 public class  ListExercise extends Exercise {
     private int currentPhase = 0;
     private boolean firstTime = true;
-    private List<String> list;
+    private SimpleList<String> list;
 
     public ListExercise(Scanner scnr) {
         super(scnr);
-        list = new ArrayList<String>();
+        //Elemento a cambiar para implementar estatica o dinamica+
+        list = new SimpleLinkedList<String>();
     }
     @Override
     protected void exerciseLogic() {
