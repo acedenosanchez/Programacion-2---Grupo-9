@@ -42,10 +42,13 @@ public class SimpleArrayList<E> implements SimpleList<E> {
     @Override
     public void add(int index, E element) {
         //Verificamos que el indice sea correcto
-        if (index < 0 || index > elements.length) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index was less than 0, or greater than size");
         } else if (size + 1 > elements.length) {
             throw new IndexOutOfBoundsException("Too many elements");
+        }
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
         }
         elements[index] = element;
         size++;
@@ -93,7 +96,7 @@ public class SimpleArrayList<E> implements SimpleList<E> {
 
     @Override
     public void clear() {
-        E[] elements = null;
+        elements = (E[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
@@ -102,7 +105,7 @@ public class SimpleArrayList<E> implements SimpleList<E> {
     //Comentarios para el profe: Mayor eficiencia si devolvemos directamente el indice donde se encuentra el valor y en caso de no encontrarse devolver -1 , así no se tiene que iterar nuevamente
     public boolean contains(Object object) {
         for (int i = 0; i < size; i++) {
-            if (elements[i] == object) {
+            if (elements[i].equals(object)) {
                 return true;
             }
 

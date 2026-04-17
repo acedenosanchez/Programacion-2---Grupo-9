@@ -68,8 +68,10 @@ public class  ListExercise extends Exercise {
         System.out.println("\nChoose an Option;"
         + "\n add: add Element."
         +"\nrem ind: Remove by index"
+        +"\nrem ref: Remove by reference"
         +"\nclear: clear"
-        +"\nrem ref: Remove by reference");
+        +"\nmm: Main menu"
+        );
 
         String userInput = scanner.nextLine().toLowerCase();
 
