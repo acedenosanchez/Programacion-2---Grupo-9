@@ -6,13 +6,13 @@ public class SimpleArrayList<E> implements SimpleList<E> {
     private E[] elements = null;
     private static final int DEFAULT_CAPACITY = 4;
 
-    @SuppressWarnings("Unchecked")
     //Inicia por el capacity por default
+    @SuppressWarnings("unchecked")
     public SimpleArrayList() {
         elements = (E[]) new Object[DEFAULT_CAPACITY];
     }
 
-    @SuppressWarnings("Unchecked")
+    @SuppressWarnings("unchecked")
     //Le indicamos el capacity como firma
     public SimpleArrayList(int capacity) {
         elements = (E[]) new Object[capacity];
@@ -21,6 +21,16 @@ public class SimpleArrayList<E> implements SimpleList<E> {
     private void validateIndex(int index) {
         if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException("Index was less than 0, or greater than size");
+    }
+
+    private void validateSize(int newSize){
+        if (newSize > size) {
+            resize();
+        }
+    }
+
+    private void resize(){
+        elements = (E[]) new Object[DEFAULT_CAPACITY];
     }
 
     @Override
@@ -137,4 +147,6 @@ public class SimpleArrayList<E> implements SimpleList<E> {
         return size == 0;
     }
 }
+
+
 
