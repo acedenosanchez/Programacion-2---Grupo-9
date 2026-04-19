@@ -23,8 +23,8 @@ public class MainProgram {
     private void selectExercise (Scanner scanner){
         System.out.println("\nSelect exercise type: "
         + "\n0: Terminate program."
-        + "\n1: Test exercise"
-        + "\n2: List exercise");
+        + "\n1: Test exercise."
+        + "\n2: List exercise.");
 
         String userInput = scanner.nextLine();
 
