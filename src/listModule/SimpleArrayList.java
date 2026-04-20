@@ -24,16 +24,25 @@ public class SimpleArrayList<E> implements SimpleList<E> {
     }
 
     private void validateSize(int newSize){
-        if (newSize > size) {
+        if (newSize > elements.length) {
             resize();
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void resize(){
-        elements = (E[]) new Object[DEFAULT_CAPACITY];
+       E[] oldElements = elements;
+        elements = (E[]) new Object[elements.length * 2];
+
+        for(int i = 0; i<size; i++){
+            elements[i] = oldElements[i];
+        }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
+
+    //Chequear con Tino
     public boolean add(E element) {
         if (size == elements.length) {
             E[] newArray = (E[]) new Object[elements.length * 2];
@@ -54,14 +63,17 @@ public class SimpleArrayList<E> implements SimpleList<E> {
         //Verificamos que el indice sea correcto
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index was less than 0, or greater than size");
-        } else if (size + 1 > elements.length) {
-            throw new IndexOutOfBoundsException("Too many elements");
         }
+
+        validateSize(size+1);
+
         for (int i = size; i > index; i--) {
             elements[i] = elements[i - 1];
         }
+
         elements[index] = element;
         size++;
+
         System.out.println("The element " + element.toString() + " has been added");
     }
 
@@ -104,6 +116,7 @@ public class SimpleArrayList<E> implements SimpleList<E> {
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void clear() {
         elements = (E[]) new Object[DEFAULT_CAPACITY];
