@@ -1,35 +1,74 @@
 package queueModule;
 
-import stackModule.SimpleStack;
+public class SimpleArrayQueue<E> implements SimpleQueue<E>{
 
-public class SimpleArrayQueue<E> implements SimpleStack<E> {
-    @Override
-    public void push(E element) {
+    private int size = 0;
+    private E[] elements = null;
+    private static final int DEFAULT_CAPACITY = 4;
 
+    @SuppressWarnings("unchecked")
+    public SimpleArrayQueue(){elements = (E[])new Object[DEFAULT_CAPACITY];}
+
+    @SuppressWarnings("unchecked")
+    public SimpleArrayQueue(int initialCapacity){elements = (E[])new Object[initialCapacity];}
+
+
+    private void validateSize(int newSize){
+        if (newSize > elements.length) {
+            resize();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void resize(){
+        E[] oldElements = elements;
+        elements = (E[]) new Object[elements.length * 2];
+
+        for(int i = 0; i<size; i++){
+            elements[i] = oldElements[i];
+        }
     }
 
     @Override
-    public E pop() {
-        return null;
+    public void unqueue(E element) {
+        if (size == 0) {
+            elements[0]=element;
+        }
+        validateSize(size+1);
+        elements[size++] = element;
     }
 
+
     @Override
-    public E peek() {
-        return null;
+    public E dequeue() {
+        E primerValor= elements[0];
+        for(int i = 0; i<size; i++)
+        {
+        elements[i]=elements[i+1];
+        }
+        size--;
+        return primerValor;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
+        return size==0;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
-}
+
+    @Override
+    public E peek() {
+        return elements[0];
+    }
+
+    @Override
+    public void clear() {
+        elements=null;
+        size=0;
+    }
+    }
+
