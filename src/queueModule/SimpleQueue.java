@@ -2,7 +2,7 @@ package queueModule;
 
 public interface SimpleQueue<E>{
 
-    public void unqueue(E element);
+    public void enqueue(E element);
     public E dequeue();
     public boolean isEmpty();
     public int size();
