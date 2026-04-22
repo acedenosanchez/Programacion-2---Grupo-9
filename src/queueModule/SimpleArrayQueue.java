@@ -30,7 +30,7 @@ public class SimpleArrayQueue<E> implements SimpleQueue<E>{
     }
 
     @Override
-    public void unqueue(E element) {
+    public void enqueue(E element) {
         if (size == 0) {
             elements[0]=element;
         }
