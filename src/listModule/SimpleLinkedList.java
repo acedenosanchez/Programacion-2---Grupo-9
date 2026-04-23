@@ -3,20 +3,20 @@ package listModule;
 public class SimpleLinkedList<E> implements SimpleList<E> {
 
     //Creamos la clase que da la estructura al nodo
-    private class Node {
+    private class LinkedNode {
         E element;
-        Node next;
-        Node previous;
+        LinkedNode next;
+        LinkedNode previous;
 
-        Node(E element) {
+        LinkedNode(E element) {
             this.element = element;
             this.next = null;
             this.previous = null;
         }
     }
 
-    private Node first;
-    private Node last;
+    private LinkedNode first;
+    private LinkedNode last;
     private int size;
 
     public SimpleLinkedList() {
@@ -38,10 +38,10 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
         }
     }
 
-    private Node getNode(int index) {
+    private LinkedNode getNode(int index) {
         validateIndex(index);
 
-        Node current;
+        LinkedNode current;
 
         if (index < size / 2) {
             current = first;
@@ -61,15 +61,15 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
     @Override
     public boolean add(E element) {
 
-        Node newNode = new Node(element);
+        LinkedNode newLinkedNode = new LinkedNode(element);
 
         if (isEmpty()) {
-            first = newNode;
-            last = newNode;
+            first = newLinkedNode;
+            last = newLinkedNode;
         } else {
-            newNode.previous = last;
-            last.next = newNode;
-            last = newNode;
+            newLinkedNode.previous = last;
+            last.next = newLinkedNode;
+            last = newLinkedNode;
         }
 
         size++;
@@ -80,7 +80,7 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
     public void add(int index, E element) {
         validateIndexForAdd(index);
 
-        Node newNode = new Node(element);
+        LinkedNode newLinkedNode = new LinkedNode(element);
 
         if (index == size) {
             add(element);
@@ -88,21 +88,21 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
         }
 
         if (index == 0) {
-            newNode.next = first;
-            first.previous = newNode;
-            first = newNode;
+            newLinkedNode.next = first;
+            first.previous = newLinkedNode;
+            first = newLinkedNode;
             size++;
             return;
         }
 
-        Node current = getNode(index);
-        Node previousNode = current.previous;
+        LinkedNode current = getNode(index);
+        LinkedNode previousLinkedNode = current.previous;
 
-        newNode.previous = previousNode;
-        newNode.next = current;
+        newLinkedNode.previous = previousLinkedNode;
+        newLinkedNode.next = current;
 
-        previousNode.next = newNode;
-        current.previous = newNode;
+        previousLinkedNode.next = newLinkedNode;
+        current.previous = newLinkedNode;
 
         size++;
     }
@@ -112,21 +112,21 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
     public E remove(int index) {
         validateIndex(index);
 
-        Node nodeToRemove = getNode(index);
-        E removedElement = nodeToRemove.element;
+        LinkedNode linkedNodeToRemove = getNode(index);
+        E removedElement = linkedNodeToRemove.element;
 
         if (size == 1) {
             first = null;
             last = null;
-        } else if (nodeToRemove == first) {
+        } else if (linkedNodeToRemove == first) {
             first = first.next;
             first.previous = null;
-        } else if (nodeToRemove == last) {
+        } else if (linkedNodeToRemove == last) {
             last = last.previous;
             last.next = null;
         } else {
-            nodeToRemove.previous.next = nodeToRemove.next;
-            nodeToRemove.next.previous = nodeToRemove.previous;
+            linkedNodeToRemove.previous.next = linkedNodeToRemove.next;
+            linkedNodeToRemove.next.previous = linkedNodeToRemove.previous;
         }
 
         size--;
@@ -135,7 +135,7 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
 
     @Override
     public boolean remove(Object object) {
-        Node current = first;
+        LinkedNode current = first;
 
         while (current != null) {
             if ((object == null && current.element == null) ||
@@ -175,7 +175,7 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
 
     @Override
     public boolean contains(Object object) {
-        Node current = first;
+        LinkedNode current = first;
 
         while (current != null) {
             if ((object == null && current.element == null) ||
@@ -194,9 +194,9 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
     }
 
     @Override
-    public E set(int index, E element) { Node node = getNode(index);
-        E oldElement = node.element;
-        node.element = element;
+    public E set(int index, E element) { LinkedNode linkedNode = getNode(index);
+        E oldElement = linkedNode.element;
+        linkedNode.element = element;
         return oldElement;
     }
 
