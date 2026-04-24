@@ -2,14 +2,14 @@ package queueModule;
 
 import listModule.SimpleLinkedList;
 
-import java.util.Queue;
 
 public class SimpleLinkedQueue<E> implements SimpleQueue<E> {
     private class LinkedNode {
         E element;
-        SimpleLinkedQueue.LinkedNode next;
-        SimpleLinkedQueue.LinkedNode previous;
+        LinkedNode next;
+        LinkedNode previous;
 
+        //Constructor
         LinkedNode(E element) {
             this.element = element;
             this.next = null;
@@ -17,17 +17,39 @@ public class SimpleLinkedQueue<E> implements SimpleQueue<E> {
         }
     }
 
-    private SimpleLinkedQueue.LinkedNode first;
-    private SimpleLinkedQueue.LinkedNode last;
-    private int size;
+        private LinkedNode first;
+        private LinkedNode last;
+        private int size;
 
-    @Override
-    public void enqueue(Object element) {
-
+    public SimpleLinkedQueue() {
+        first = null;
+        last = null;
+        size = 0;
     }
 
     @Override
-    public Object dequeue() {
+    public void enqueue(E element) {
+        LinkedNode newLinkedNode = new LinkedNode(element);
+
+        if (isEmpty()) {
+            first = newLinkedNode;
+            last = newLinkedNode;
+        } else {
+            newLinkedNode.previous = last;
+            last.next = newLinkedNode;
+            last = newLinkedNode;
+        }
+        size++;
+    }
+
+    @Override
+    public E dequeue() {
+      E removedElement = first.element;
+      first = first.next;
+       if(first == null) {
+           last = null;
+       }
+        size--;
         return null;
     }
 
@@ -42,7 +64,7 @@ public class SimpleLinkedQueue<E> implements SimpleQueue<E> {
     }
 
     @Override
-    public Object peek() {
+    public E peek() {
         return null;
     }
 
