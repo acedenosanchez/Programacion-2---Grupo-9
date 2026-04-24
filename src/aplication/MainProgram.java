@@ -1,36 +1,45 @@
 package aplication;
+
 import java.util.Scanner;
 import listModule.ListExercise;
+import stackModule.StackExercise;
+import queueModule.QueueExercise;
 
 public class MainProgram {
     private boolean running = true;
     private Exercise exercise;
 
     public static void main(String[] args) {
-    new MainProgram().run();
+        new MainProgram().run();
     }
 
-    private void run (){
+    private void run() {
         Scanner scanner = new Scanner(System.in);
-        while (running){
+        while (running) {
             selectExercise(scanner);
-            if (exercise != null) exercise.run();
+            // Si el usuario no eligiÃ³ terminar (0), se corre el ejercicio seleccionado
+            if (running && exercise != null) {
+                exercise.run();
+            }
         }
         scanner.close();
         System.out.println("Program terminated");
     }
 
-    private void selectExercise (Scanner scanner){
+    private void selectExercise(Scanner scanner) {
         System.out.println("\nSelect exercise type: "
-        + "\n0: Terminate program."
-        + "\n1: Test exercise."
-        + "\n2: List exercise.");
+                + "\n0: Terminate program."
+                + "\n1: Test exercise."
+                + "\n2: List exercise."
+                + "\n3: Stack exercise."
+                + "\n4: Queue exercise.");
 
         String userInput = scanner.nextLine();
 
-        switch (userInput){
+        switch (userInput) {
             case "0":
                 running = false;
+                exercise = null;
                 break;
             case "1":
                 exercise = new TestExercise(scanner);
@@ -38,7 +47,12 @@ public class MainProgram {
             case "2":
                 exercise = new ListExercise(scanner);
                 break;
-
+            case "3":
+                exercise = new StackExercise(scanner);
+                break;
+            case "4":
+                exercise = new QueueExercise(scanner);
+                break;
             default:
                 System.out.println("\n Invalid input, try again...");
                 selectExercise(scanner);
