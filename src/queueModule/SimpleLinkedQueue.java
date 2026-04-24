@@ -1,7 +1,7 @@
 package queueModule;
 
-import listModule.SimpleLinkedList;
 
+import java.util.NoSuchElementException;
 
 public class SimpleLinkedQueue<E> implements SimpleQueue<E> {
     private class LinkedNode {
@@ -44,32 +44,50 @@ public class SimpleLinkedQueue<E> implements SimpleQueue<E> {
 
     @Override
     public E dequeue() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Queue is empty");
+        }
+
       E removedElement = first.element;
+      //modificá el primer nodo
       first = first.next;
+
+      //Verificamos si la cola quedo vacia
        if(first == null) {
            last = null;
        }
+
+       //elimino la conexión con el nodo anterior que salio de la cola
+       else{
+           first.previous = null;
+       }
+
         size--;
-        return null;
+        return removedElement;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size==0;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public E peek() {
-        return null;
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return first.element;
     }
 
     @Override
     public void clear() {
-
+        first = null;
+        last = null;
+        size = 0;
     }
 }
