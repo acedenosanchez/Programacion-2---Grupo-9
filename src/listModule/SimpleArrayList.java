@@ -20,7 +20,7 @@ public class SimpleArrayList<E> implements SimpleList<E> {
 
     private void validateIndex(int index) {
         if (index < 0 || index >= size)
-            throw new IndexOutOfBoundsException("Index was less than 0, or greater than size");
+            throw new IndexOutOfBoundsException("Index was less than 0, or greater than size.");
     }
 
     private void validateSize(int newSize){
@@ -52,7 +52,7 @@ public class SimpleArrayList<E> implements SimpleList<E> {
     public void add(int index, E element) {
         //Verificamos que el indice sea correcto
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index was less than 0, or greater than size");
+            throw new IndexOutOfBoundsException("Index was less than 0, or greater than size.");
         }
 
         validateSize(size+1);
@@ -64,7 +64,7 @@ public class SimpleArrayList<E> implements SimpleList<E> {
         elements[index] = element;
         size++;
 
-        System.out.println("The element " + element.toString() + " has been added");
+        System.out.println("The element " + element.toString() + " has been added.");
     }
 
     @Override

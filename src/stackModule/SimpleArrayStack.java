@@ -40,7 +40,7 @@ public class SimpleArrayStack <E> implements SimpleStack<E>{
     @Override
     public E pop() {
         if (isEmpty()) {
-            throw new NoSuchElementException("Stack vacía.");
+            throw new NoSuchElementException("Stack is empty.");
         }
         E value = elements[size-1];
         elements[size-1] = null;
@@ -51,7 +51,7 @@ public class SimpleArrayStack <E> implements SimpleStack<E>{
     @Override
     public E peek() {
         if (isEmpty()) {
-            throw new NoSuchElementException("Stack vacía.");
+            throw new NoSuchElementException("Stack is empty.");
         }
 
         return elements[size - 1];
@@ -62,6 +62,7 @@ public class SimpleArrayStack <E> implements SimpleStack<E>{
         return size == 0;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void clear() {
         elements = (E[]) new Object[DEFAULT_CAPACITY];

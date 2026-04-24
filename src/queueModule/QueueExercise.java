@@ -25,8 +25,10 @@ public class QueueExercise extends Exercise {
                 break;
             case 2:
                 dequeueLogic();
+                break;
             case 3:
                 peekLogic();
+                break;
             case 4:
                 clearLogic();
                 break;

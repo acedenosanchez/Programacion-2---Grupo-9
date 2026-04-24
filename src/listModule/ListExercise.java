@@ -37,7 +37,7 @@ public class  ListExercise extends Exercise {
     private void menuLogic(){
         if (firstTime)
         {
-            System.out.println("Welcome to the List exercise");
+            System.out.println("Welcome to the List exercise.");
             firstTime = false;
         }
         else{

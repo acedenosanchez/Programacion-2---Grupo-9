@@ -28,13 +28,13 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
 
     private void validateIndex(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index fuera de rango");
+            throw new IndexOutOfBoundsException("Index out of range.");
         }
     }
 
     private void validateIndexForAdd(int index) {
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index fuera de rango");
+            throw new IndexOutOfBoundsException("Index out of range.");
         }
     }
 

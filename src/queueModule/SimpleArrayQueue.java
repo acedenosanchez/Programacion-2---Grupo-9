@@ -48,7 +48,7 @@ public class SimpleArrayQueue<E> implements SimpleQueue<E> {
     @Override
     public E dequeue() {
         if (isEmpty()) {
-            throw new NoSuchElementException("Is empty");
+            throw new NoSuchElementException("Queue is empty");
         }
         E primerValor = elements[0];
         for (int i = 0; i < size - 1; i++) {
@@ -71,7 +71,7 @@ public class SimpleArrayQueue<E> implements SimpleQueue<E> {
     @Override
     public E peek() {
         if (isEmpty()) {
-            throw new NoSuchElementException("Is empty");
+            throw new NoSuchElementException("Queue is empty");
         }
         return elements[0];
     }
