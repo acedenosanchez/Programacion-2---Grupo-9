@@ -1,30 +1,36 @@
 package queueModule;
 
-public class SimpleArrayQueue<E> implements SimpleQueue<E>{
+import java.util.NoSuchElementException;
+
+public class SimpleArrayQueue<E> implements SimpleQueue<E> {
 
     private int size = 0;
     private E[] elements = null;
     private static final int DEFAULT_CAPACITY = 4;
 
     @SuppressWarnings("unchecked")
-    public SimpleArrayQueue(){elements = (E[])new Object[DEFAULT_CAPACITY];}
+    public SimpleArrayQueue() {
+        elements = (E[]) new Object[DEFAULT_CAPACITY];
+    }
 
     @SuppressWarnings("unchecked")
-    public SimpleArrayQueue(int initialCapacity){elements = (E[])new Object[initialCapacity];}
+    public SimpleArrayQueue(int initialCapacity) {
+        elements = (E[]) new Object[initialCapacity];
+    }
 
 
-    private void validateSize(int newSize){
+    private void validateSize(int newSize) {
         if (newSize > elements.length) {
             resize();
         }
     }
 
     @SuppressWarnings("unchecked")
-    private void resize(){
+    private void resize() {
         E[] oldElements = elements;
         elements = (E[]) new Object[elements.length * 2];
 
-        for(int i = 0; i<size; i++){
+        for (int i = 0; i < size; i++) {
             elements[i] = oldElements[i];
         }
     }
@@ -32,19 +38,21 @@ public class SimpleArrayQueue<E> implements SimpleQueue<E>{
     @Override
     public void enqueue(E element) {
         if (size == 0) {
-            elements[0]=element;
+            elements[0] = element;
         }
-        validateSize(size+1);
+        validateSize(size + 1);
         elements[size++] = element;
     }
 
 
     @Override
     public E dequeue() {
-        E primerValor= elements[0];
-        for(int i = 0; i<size; i++)
-        {
-        elements[i]=elements[i+1];
+        if (isEmpty()) {
+            throw new NoSuchElementException("Is empty");
+        }
+        E primerValor = elements[0];
+        for (int i = 0; i < size - 1; i++) {
+            elements[i] = elements[i + 1];
         }
         size--;
         return primerValor;
@@ -52,7 +60,7 @@ public class SimpleArrayQueue<E> implements SimpleQueue<E>{
 
     @Override
     public boolean isEmpty() {
-        return size==0;
+        return size == 0;
     }
 
     @Override
@@ -62,13 +70,17 @@ public class SimpleArrayQueue<E> implements SimpleQueue<E>{
 
     @Override
     public E peek() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Is empty");
+        }
         return elements[0];
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void clear() {
-        elements=null;
-        size=0;
+        elements = (E[]) new Object[DEFAULT_CAPACITY];
+        size = 0;
     }
-    }
+}
 

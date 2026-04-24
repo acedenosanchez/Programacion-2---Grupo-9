@@ -79,7 +79,7 @@ public class SimpleLinkedQueue<E> implements SimpleQueue<E> {
     @Override
     public E peek() {
         if (isEmpty()) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("Is empty");
         }
         return first.element;
     }
