@@ -42,19 +42,9 @@ public class SimpleArrayList<E> implements SimpleList<E> {
     @SuppressWarnings("unchecked")
     @Override
 
-    //Chequear con Tino
     public boolean add(E element) {
-        if (size == elements.length) {
-            E[] newArray = (E[]) new Object[elements.length * 2];
-            for (int i = 0; i < size; i++) {
-                newArray[i] = elements[i];
-            }
-            elements = newArray;
-        }
-
-        elements[size] = element;
-        size++;
-
+        validateSize(size+1);
+        elements[size++] = element;
         return true;
     }
 
