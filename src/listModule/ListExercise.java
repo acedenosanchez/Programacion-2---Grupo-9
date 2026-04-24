@@ -31,6 +31,9 @@ public class  ListExercise extends Exercise {
             case 4:
                 clearLogic();
                 break;
+            case 5:
+                addByIndexLogic();
+                break;
         }
     }
 
@@ -65,18 +68,21 @@ public class  ListExercise extends Exercise {
         }
 
         System.out.println("\nChoose an Option;"
-        + "\nadd: add Element."
-        +"\nrem ind: Remove by index."
-        +"\nrem ref: Remove by reference."
-        +"\nclear: clear."
-        +"\nmm: Main menu."
+                + "\nadd: add Element."
+                +"\nadd ind: Add element by index."
+                +"\nrem ind: Remove by index."
+                +"\nrem ref: Remove by reference."
+                +"\nclear: clear."
+                +"\nmm: Main menu."
         );
-
         String userInput = scanner.nextLine().toLowerCase();
 
-        switch (userInput){
+        switch (userInput) {
             case "add":
                 currentPhase = 1;
+                break;
+            case "add ind":
+                currentPhase = 5;
                 break;
             case "rem ind":
                 currentPhase = 2;
@@ -211,6 +217,56 @@ public class  ListExercise extends Exercise {
             }
 
             System.out.println("\nList contents: " + fullList);
+
+            boolean validAnswer = false;
+            while (!validAnswer) {
+                System.out.println("\nRepeat operation? (yes/no)");
+                String answer = scanner.nextLine().toLowerCase();
+
+                if (answer.equals("yes")) {
+                    validAnswer = true;
+                } else if (answer.equals("no")) {
+                    validAnswer = true;
+                    repeat = false;
+                } else {
+                    System.out.println("\nInvalid input, try again...");
+                }
+            }
+        }
+
+        currentPhase = 0;
+    }
+    private void addByIndexLogic() {
+        boolean repeat = true;
+
+        while (repeat) {
+            System.out.println("\nEnter index to add:");
+            String input = scanner.nextLine();
+
+            try {
+                int index = Integer.parseInt(input);
+
+                if (index < 0 || index > list.size()) {
+                    System.out.println("\nInvalid index.");
+                } else {
+                    System.out.println("\nEnter element to add:");
+                    String element = scanner.nextLine();
+
+                    list.add(index, element);
+
+                    String fullList = "";
+                    for (int i = 0; i < list.size(); i++) {
+                        fullList += list.get(i);
+                        if (i < list.size() - 1) {
+                            fullList += ", ";
+                        }
+                    }
+
+                    System.out.println("\nList contents: " + fullList);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("\nInvalid input, index must be a number.");
+            }
 
             boolean validAnswer = false;
             while (!validAnswer) {
