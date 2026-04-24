@@ -13,14 +13,11 @@ public class MainProgram {
         new MainProgram().run();
     }
 
-    private void run() {
+    private void run (){
         Scanner scanner = new Scanner(System.in);
-        while (running) {
+        while (running){
             selectExercise(scanner);
-            // Si el usuario no eligiÃ³ terminar (0), se corre el ejercicio seleccionado
-            if (running && exercise != null) {
-                exercise.run();
-            }
+            if (exercise != null) exercise.run();
         }
         scanner.close();
         System.out.println("Program terminated");

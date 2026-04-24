@@ -1,112 +1,158 @@
 package queueModule;
 
-
 import aplication.Exercise;
 import java.util.Scanner;
 
 
 public class QueueExercise extends Exercise {
-
-    private SimpleQueue<String> queue;
+    private int currentPhase = 0;
     private boolean firstTime = true;
+    private SimpleQueue<String> queue;
 
     public QueueExercise(Scanner scanner) {
         super(scanner);
-        queue = new SimpleArrayQueue<>();
+        queue = new SimpleArrayQueue<String>();
     }
 
     @Override
     protected void exerciseLogic() {
-        if (firstTime) {
-            System.out.println("¡Bienvenido al módulo de gestión de Colas!");
-            firstTime = false;
-        } else {
-
-            System.out.println("\n- Estado de la Queue-");
-            System.out.println("¿Está vacía?: " + queue.isEmpty());
-            System.out.println("Cantidad de elementos (size): " + queue.size());
-        }
-
-        menuLogic();
-    }
-    // Menu
-    private void menuLogic() {
-        System.out.println("\nSeleccione una operación:"
-                + "\n1. Enqueue (Agregar elemento)"
-                + "\n2. Dequeue (Remover primer elemento)"
-                + "\n3. Peek (Ver frente)"
-                + "\n4. Clear (Vaciar cola)"
-                + "\n0. Volver al menú principal");
-
-        String option = scanner.nextLine();
-
-        switch (option) {
-            case "1": runEnqueue(); break;
-            case "2": runDequeue(); break;
-            case "3": runPeek(); break;
-            case "4": runClear(); break;
-            case "0": running = false; break;
-            default:
-                System.out.println("Entrada inválida, intente nuevamente.");
+        switch (currentPhase) {
+            case 0:
                 menuLogic();
                 break;
+            case 1:
+                enqueueLogic();
+                break;
+            case 2:
+                dequeueLogic();
+            case 3:
+                peekLogic();
+            case 4:
+                clearLogic();
+                break;
         }
     }
+
+    private void menuLogic() {
+        if (firstTime) {
+            System.out.println("Welcome to the Queue exercise.");
+            firstTime = false;
+        } else {
+            System.out.println("\nQueue size: " + queue.size()
+                    + "\nQueue is empty: " + queue.isEmpty());
+        }
+
+        System.out.println("\nChoose an option:"
+                + "\nenqueue: Enqueue element."
+                + "\ndequeue: Dequeue element."
+                + "\npeek: Peek element."
+                + "\nclear: Clear queue."
+                + "\nmm: Main menu.");
+
+        String userInput = scanner.nextLine().toLowerCase();
+
+        switch (userInput) {
+            case "enqueue":
+                currentPhase = 1;
+                break;
+            case "dequeue":
+                currentPhase = 2;
+                break;
+            case "peek":
+                currentPhase = 3;
+                break;
+            case "clear":
+                currentPhase = 4;
+                break;
+            case "mm":
+                running = false;
+                break;
+            default:
+                System.out.println("\nInvalid input, try again...");
+                break;
+        }
+    }
+
     // Metodos de cola
-    private void runEnqueue() {
-        String respuesta = "si";
-        while (respuesta.equalsIgnoreCase("si")) {
-            System.out.print("Ingrese el elemento: ");
-            String dato = scanner.nextLine();
-            queue.enqueue(dato);
-            System.out.println("Elemento '" + dato + "' agregado.");
+    private void enqueueLogic() {
+        boolean repeat = true;
 
-            System.out.print("¿Desea agregar otro? (si/no): ");
-            respuesta = scanner.nextLine();
+        while (repeat) {
+            System.out.print("\nEnter an element to enqueue:");
+            String element = scanner.nextLine();
+
+            queue.enqueue(element);
+
+            System.out.println("\nElement enqueued correctly.");
+
+            boolean validAnswer = false;
+            while (!validAnswer) {
+                System.out.println("\nRepeat operation? (yes/no)");
+                String answer = scanner.nextLine().toLowerCase();
+
+                if (answer.equals("yes")) {
+                    validAnswer = true;
+                } else if (answer.equals("no")) {
+                    validAnswer = true;
+                    repeat = false;
+                } else {
+                    System.out.println("\nInvalid input, try again...");
+                }
+            }
         }
+
+        currentPhase = 0;
     }
 
-    private void runDequeue() {
-        String respuesta = "si";
-        while (respuesta.equalsIgnoreCase("si")) {
+    private void dequeueLogic() {
+        boolean repeat = true;
+
+        while (repeat) {
             if (queue.isEmpty()) { // Validación
-                System.out.println("No hay elementos para remover.");
+                System.out.println("\nThe queue is empty. Operation not possible.");
                 break;
             }
-            String removido = queue.dequeue();
-            System.out.println("Se eliminó el frente: " + removido);
 
-            if (queue.isEmpty()) break;
+            String removedElement = queue.dequeue();
+            System.out.println("\nRemoved element: " + removedElement);
 
-            System.out.print("¿Desea desencolar otro? (si/no): ");
-            respuesta = scanner.nextLine();
+            boolean validAnswer = false;
+            while (!validAnswer) {
+                System.out.println("\nRepeat operation? (yes/no)");
+                String answer = scanner.nextLine().toLowerCase();
+
+                if (answer.equals("yes")) {
+                    validAnswer = true;
+                } else if (answer.equals("no")) {
+                    validAnswer = true;
+                    repeat = false;
+                } else {
+                    System.out.println("\nInvalid input, try again...");
+                }
+            }
         }
+
+        currentPhase = 0;
     }
 
-    private void runPeek() {
-        if (queue.isEmpty()) { //
-            System.out.println("La cola está vacía. No hay elementos al frente.");
-        } else {
-            System.out.println("Elemento al frente: " + queue.peek());
-        }
-    }
-
-    private void runClear() {
+    private void peekLogic() {
         if (queue.isEmpty()) {
-            System.out.println("La estructura ya se encuentra vacía.");
+            System.out.println("\nThe queue is empty. Operation not possible.");
+        } else {
+            System.out.println("\nFirst element: " + queue.peek());
+        }
+
+        currentPhase = 0;
+    }
+
+    private void clearLogic() {
+        if (queue.isEmpty()) {
+            System.out.println("\nThe queue is already empty.");
         } else {
             queue.clear();
-            System.out.println("Cola vaciada correctamente.");
+            System.out.println("\nQueue cleared.");
         }
-    }
 
-    private boolean confirmarRepeticion() {
-        System.out.print("¿Desea repetir la operación? (si/no): ");
-        String respuesta = scanner.nextLine().toLowerCase();
-        while (!respuesta.equals("si") && !respuesta.equals("no")) {
-            System.out.print("Entrada inválida. Escriba 'si' o 'no': ");
-            respuesta = scanner.nextLine().toLowerCase();
-        }
-        return respuesta.equals("si");
+        currentPhase = 0;
     }
 }
