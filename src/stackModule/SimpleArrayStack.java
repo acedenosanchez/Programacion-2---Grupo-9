@@ -1,5 +1,7 @@
 package stackModule;
 
+import java.util.NoSuchElementException;
+
 public class SimpleArrayStack <E> implements SimpleStack<E>{
     private int size = 0;
     private E[] elements = null;
@@ -20,35 +22,39 @@ public class SimpleArrayStack <E> implements SimpleStack<E>{
     }
 
     @SuppressWarnings("unchecked")
-    private void resize() {
+    private void resize(){
         E[] oldElements = elements;
         elements = (E[]) new Object[elements.length * 2];
 
+        for(int i = 0; i<size; i++){
+            elements[i] = oldElements[i];
+        }
     }
 
     @Override
     public void push(E element) {
-        if(elements[0] == null){
-            elements[0] = element;
-        }
-        else{
-            validateSize(size+1);
-        }
-        elements[size]=element;
-        size++;
+        validateSize(size + 1);
+        elements[size++] = element;
     }
 
     @Override
     public E pop() {
-        E popElement = elements[size-1];
+        if (isEmpty()) {
+            throw new NoSuchElementException("Stack vacía.");
+        }
+        E value = elements[size-1];
         elements[size-1] = null;
         size--;
-        return popElement;
+        return value;
     }
 
     @Override
     public E peek() {
-        return elements[size-1];
+        if (isEmpty()) {
+            throw new NoSuchElementException("Stack vacía.");
+        }
+
+        return elements[size - 1];
     }
 
     @Override
@@ -58,7 +64,7 @@ public class SimpleArrayStack <E> implements SimpleStack<E>{
 
     @Override
     public void clear() {
-        elements = null;
+        elements = (E[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 

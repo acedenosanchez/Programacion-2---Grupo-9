@@ -8,8 +8,8 @@ public class StackExercise extends Exercise {
     private boolean firstTime = true;
     private SimpleStack<String> stack;
 
-    public StackExercise(Scanner scnr) {
-        super(scnr);
+    public StackExercise(Scanner scanner) {
+        super(scanner);
         stack = new SimpleArrayStack<String>();
     }
 

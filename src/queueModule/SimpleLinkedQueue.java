@@ -22,12 +22,12 @@ public class SimpleLinkedQueue<E> implements SimpleQueue<E> {
     private int size;
 
     @Override
-    public void enqueue(Object element) {
+    public void enqueue(E element) {
 
     }
 
     @Override
-    public Object dequeue() {
+    public E dequeue() {
         return null;
     }
 
@@ -42,7 +42,7 @@ public class SimpleLinkedQueue<E> implements SimpleQueue<E> {
     }
 
     @Override
-    public Object peek() {
+    public E peek() {
         return null;
     }
 
