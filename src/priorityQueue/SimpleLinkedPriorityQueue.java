@@ -1,6 +1,20 @@
 package priorityQueue;
 
-public class SimpleLinkedPriorityQueue implements PriorityQueue {
+import java.security.PrivateKey;
+
+public class SimpleLinkedPriorityQueue <E> implements PriorityQueue <E> {
+
+    private class LinkedNode {
+        E element;
+        LinkedNode next;
+        LinkedNode last;
+        int priority;
+
+        LinkedNode(E element) {
+            super();
+        }
+    }
+
     @Override
     public void enqueue(Object elem, int priority) {
 
@@ -22,7 +36,7 @@ public class SimpleLinkedPriorityQueue implements PriorityQueue {
     }
 
     @Override
-    public Object peek() {
+    public E peek() {
         return null;
     }
 
