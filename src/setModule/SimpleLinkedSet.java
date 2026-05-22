@@ -2,9 +2,27 @@ package setModule;
 
 public class SimpleLinkedSet<E> implements SimpleSet<E>{
 
+    private class LinkedNode {
+        E element;
+        LinkedNode next;
+
+        LinkedNode(E element) {
+            this.element = element;
+            this.next = null;
+        }
+    }
+
+    private LinkedNode first;
+    private int size;
+
+    public SimpleLinkedSet() {
+        first = null;
+        size = 0;
+    }
+
     @Override
     public boolean add(E element) {
-        return false;
+
     }
 
     @Override
