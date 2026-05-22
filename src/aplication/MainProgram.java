@@ -4,6 +4,7 @@ import java.util.Scanner;
 import listModule.ListExercise;
 import stackModule.StackExercise;
 import queueModule.QueueExercise;
+import setModule.SetExercise;
 
 public class MainProgram {
     private boolean running = true;
@@ -29,7 +30,8 @@ public class MainProgram {
                 + "\n1: Test exercise."
                 + "\n2: List exercise."
                 + "\n3: Stack exercise."
-                + "\n4: Queue exercise.");
+                + "\n4: Queue exercise."
+                + "\n5: Set exercise.");
 
         String userInput = scanner.nextLine();
 
@@ -49,6 +51,9 @@ public class MainProgram {
                 break;
             case "4":
                 exercise = new QueueExercise(scanner);
+                break;
+            case "5":
+                exercise = new SetExercise(scanner);
                 break;
             default:
                 System.out.println("\n Invalid input, try again...");
