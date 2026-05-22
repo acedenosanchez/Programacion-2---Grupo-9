@@ -32,21 +32,25 @@ public class SetExercise extends Exercise {
             case 3:
                 removeLogic();
                 break;
+            case 4:
+                containsLogic();
+                break;
         }
     }
-   private String setToString(SimpleSet<String> set) {
-            String result = "";
-            Object[] elements = set.toArray();
 
-            for (int i = 0; i < elements.length; i++) {
-                result += elements[i];
+    private String setToString(SimpleSet<String> set) {
+        String result = "";
+        Object[] elements = set.toArray();
 
-                if (i < elements.length - 1) {
-                    result += ", ";
-                }
+        for (int i = 0; i < elements.length; i++) {
+            result += elements[i];
+
+            if (i < elements.length - 1) {
+                result += ", ";
             }
+        }
 
-            return result;
+        return result;
     }
 
     private void menuLogic() {
@@ -96,6 +100,7 @@ public class SetExercise extends Exercise {
                 break;
         }
     }
+
     private void selectSetLogic() {
         System.out.println("\nChoose a Set:"
                 + "\na: Set A."
@@ -128,6 +133,7 @@ public class SetExercise extends Exercise {
         System.out.println("\nChoose an option:"
                 + "\nadd: Add element."
                 + "\nremove: Remove element."
+                + "\ncontains: Check if elements exists."
                 + "\nback: Back to main Set menu.");
 
         String userInput = scanner.nextLine().toLowerCase();
@@ -138,6 +144,9 @@ public class SetExercise extends Exercise {
                 break;
             case "remove":
                 currentPhase = 3;
+                break;
+            case "contains":
+                currentPhase = 4;
                 break;
             case "back":
                 currentPhase = 0;
@@ -206,6 +215,45 @@ public class SetExercise extends Exercise {
             }
 
             System.out.println("\nSelected Set contents: " + setToString(selectedSet));
+
+            boolean validAnswer = false;
+            while (!validAnswer) {
+                System.out.println("\nRepeat operation? (yes/no)");
+                String answer = scanner.nextLine().toLowerCase();
+
+                if (answer.equals("yes")) {
+                    validAnswer = true;
+                } else if (answer.equals("no")) {
+                    validAnswer = true;
+                    repeat = false;
+                } else {
+                    System.out.println("\nInvalid input, try again...");
+                }
+            }
+        }
+
+        currentPhase = 0;
+    }
+
+    private void containsLogic() {
+        boolean repeat = true;
+
+        while (repeat) {
+            if (selectedSet.isEmpty()) {
+                System.out.println("\nThe selected Set is empty. Operation not possible.");
+                break;
+            }
+
+            System.out.println("\nEnter an element to search:");
+            String element = scanner.nextLine();
+
+            boolean exists = selectedSet.contains(element);
+
+            if (exists) {
+                System.out.println("\nElement exists in the selected Set.");
+            } else {
+                System.out.println("\nElement does not exist in the selected Set.");
+            }
 
             boolean validAnswer = false;
             while (!validAnswer) {
