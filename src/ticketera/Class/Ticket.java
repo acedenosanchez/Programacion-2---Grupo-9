@@ -1,4 +1,4 @@
-package Ticketera.Class;
+package ticketera.Class;
 
 public class Ticket {
 

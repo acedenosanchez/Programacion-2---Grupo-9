@@ -1,8 +1,8 @@
-package Ticketera.Console;
+package ticketera.Console;
 
 
 
-import Ticketera.Service.TicketHandler;
+import ticketera.Service.TicketHandler;
 
 import java.util.Scanner;
 

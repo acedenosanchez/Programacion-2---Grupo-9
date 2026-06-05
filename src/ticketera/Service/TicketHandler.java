@@ -1,6 +1,6 @@
-package Ticketera.Service;
+package ticketera.Service;
 
-import Ticketera.Class.Ticket;
+import ticketera.Class.Ticket;
 import listModule.SimpleLinkedList;
 import priorityQueue.SimpleLinkedPriorityQueue;
 import queueModule.SimpleLinkedQueue;
