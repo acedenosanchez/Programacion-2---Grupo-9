@@ -6,8 +6,11 @@ public class Logic {
 
     private static final int MAX_FAILED_ATTEMPTS = 3;
 
+    //Diccionarios para llevar el listado de usuarios
     private SimpleLinkedDictionary<String, String> users;
+    //Diccionarios para llevar el listado de intentos de ingreso por user
     private SimpleLinkedDictionary<String, Integer> failedAttempts;
+    //Diccionarios para llevar el listado de usuarios bloqueados
     private SimpleLinkedDictionary<String, Boolean> blockedUsers;
 
     public Logic() {
@@ -18,6 +21,7 @@ public class Logic {
     }
 
     public boolean registerUser(String username, String password) {
+        //Validación de los inputs
         validateUsername(username);
         validatePassword(password);
 
