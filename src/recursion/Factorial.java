@@ -1,6 +1,4 @@
-package Recursion;
-
-import java.util.Scanner;
+package recursion;
 
 public class Factorial {
     public static void main(String[] args) {

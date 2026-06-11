@@ -1,17 +1,18 @@
-package TreeModule;
+package treeModule;
 
-import com.sun.source.tree.Tree;
 import listModule.SimpleArrayList;
 import listModule.SimpleLinkedList;
 import listModule.SimpleList;
-import priorityQueue.SimpleArrayPriorityQueue;
 import queueModule.SimpleArrayQueue;
 
 public class BST<E extends Comparable<E>> {
-    public TreeNode<E> root = null;
-    int size;
+    private TreeNode<E> root = null;
+    private int size;
 
     public void insert(E value){
+        if (value == null) {
+            throw new IllegalArgumentException("El valor no puede ser null");
+        }
         root = insertRecursive(root, value);
 
     }
@@ -37,6 +38,9 @@ public class BST<E extends Comparable<E>> {
     }
     public void remove(E value)
     {
+        if (value == null) {
+            throw new IllegalArgumentException("El valor no puede ser null");
+        }
         root = removeRecursive(root, value);
     }
     private TreeNode<E> removeRecursive(TreeNode<E> current, E value)
@@ -87,10 +91,17 @@ public class BST<E extends Comparable<E>> {
         return current;
     }
 
-    public void clear() { root = null; }
+    public void clear()
+    {
+        root = null;
+        size = 0;
+    }
 
     public boolean contains(E value)
     {
+        if (value == null) {
+            throw new IllegalArgumentException("El valor no puede ser null");
+        }
         return containsRecursive(root, value);
     }
 
@@ -116,18 +127,21 @@ public class BST<E extends Comparable<E>> {
     public SimpleList<E> preOrder()
     {
         SimpleList<E> result = new SimpleArrayList<E>();
+        preOrderDFS(root,result);
         return result;
     }
 
     public SimpleList<E> inOrder()
     {
         SimpleList<E> result = new SimpleArrayList<E>();
+        inOrderDFS(root,result);
         return result;
     }
 
     public SimpleList<E> postOrder()
     {
         SimpleList<E> result = new SimpleArrayList<E>();
+        postOrderDFS(root,result);
         return result;
     }
 
@@ -144,23 +158,25 @@ public class BST<E extends Comparable<E>> {
     {
 
         if(current == null) return;
-        preOrderDFS(current.left, list);
+        inOrderDFS(current.left, list);
         list.add(current.value);
-        preOrderDFS(current.right, list);
+        inOrderDFS(current.right, list);
     }
 
     private void postOrderDFS(TreeNode<E> current, SimpleList<E> list)
     {
 
         if(current == null) return;
-        preOrderDFS(current.left, list);
-        preOrderDFS(current.right, list);
+        postOrderDFS(current.left, list);
+        postOrderDFS(current.right, list);
         list.add(current.value);
     }
 
     public SimpleList<E> levelOrder()
     {
         SimpleList<E> result = new SimpleLinkedList<E>();
+
+        if (root == null) return result;
 
         // Acá usen su Queue, NO Priority
         SimpleArrayQueue<TreeNode<E>> q = new SimpleArrayQueue<TreeNode<E>>();
