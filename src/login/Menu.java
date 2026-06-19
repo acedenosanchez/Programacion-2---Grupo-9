@@ -1,6 +1,7 @@
 package login;
 
 import java.util.Scanner;
+import listModule.SimpleList;
 
 public class Menu {
 
@@ -127,10 +128,10 @@ public class Menu {
             return;
         }
 
-        Object[] users = logic.getUsers();
+        SimpleList<String> users = logic.getUsers();
 
-        for (int i = 0; i < users.length; i++) {
-            String username = (String) users[i];
+        for (int i = 0; i < users.size(); i++) {
+            String username = users.get(i);
             String status = logic.isBlocked(username) ? "BLOQUEADO" : "ACTIVO";
             int failedAttempts = logic.getFailedAttempts(username);
 

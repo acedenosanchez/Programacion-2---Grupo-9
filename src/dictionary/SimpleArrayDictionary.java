@@ -1,5 +1,11 @@
 package dictionary;
 
+import listModule.SimpleArrayList;
+import listModule.SimpleList;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class SimpleArrayDictionary<K, V> implements SimpleDictionary<K, V> {
 
     private static final int DEFAULT_CAPACITY = 4;
@@ -85,24 +91,22 @@ public class SimpleArrayDictionary<K, V> implements SimpleDictionary<K, V> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public K[] keys() {
-        K[] result = (K[]) new Object[size];
+    public SimpleList<K> keys() {
+        SimpleList<K> result = new SimpleArrayList<K>(size);
 
         for (int i = 0; i < size; i++) {
-            result[i] = keys[i];
+            result.add(keys[i]);
         }
 
         return result;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public V[] values() {
-        V[] result = (V[]) new Object[size];
+    public SimpleList<V> values() {
+        SimpleList<V> result = new SimpleArrayList<V>(size);
 
         for (int i = 0; i < size; i++) {
-            result[i] = values[i];
+            result.add(values[i]);
         }
 
         return result;

@@ -1,6 +1,7 @@
 package login;
 
 import dictionary.SimpleLinkedDictionary;
+import listModule.SimpleList;
 
 public class Logic {
 
@@ -103,10 +104,9 @@ public class Logic {
         return users.size();
     }
 
-    public Object[] getUsers() {
+    public SimpleList<String> getUsers() {
         return users.keys();
     }
-
 
     // Métodos de servicio
     private void loadDefaultUsers() {
