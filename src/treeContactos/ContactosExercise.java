@@ -3,12 +3,13 @@ package treeContactos;
 import treeModule.BST;
 import aplication.Exercise;
 import listModule.SimpleList;
+import treeModule.AVL;
 
 import java.util.Scanner;
 
 public class ContactosExercise extends Exercise {
 
-    private BST<Contactos> contacts = new BST<Contactos>();
+    private AVL<Contactos> contacts = new AVL<Contactos>();
     private boolean firstTime = true;
 
     public ContactosExercise(Scanner scanner) {
@@ -18,7 +19,7 @@ public class ContactosExercise extends Exercise {
     @Override
     protected void exerciseLogic() {
         if (firstTime) {
-            System.out.println("Bienvenido a la aplicación de contactos con BST.");
+            System.out.println("Bienvenido a la aplicación de contactos con AVL.");
             firstTime = false;
         }
 
@@ -66,6 +67,8 @@ public class ContactosExercise extends Exercise {
         System.out.println("===== CONTACTOS =====");
         System.out.println("Cantidad de contactos: " + contacts.size());
         System.out.println("¿Agenda vacía?: " + (contacts.isEmpty() ? "Sí" : "No"));
+        System.out.println("Altura del árbol: " + contacts.height());
+        System.out.println("¿Árbol balanceado?: " + (contacts.isBalanced() ? "Sí" : "No"));
         System.out.println();
         System.out.println("1. Agregar contacto");
         System.out.println("2. Editar contacto");
@@ -265,19 +268,8 @@ public class ContactosExercise extends Exercise {
 
     private Contactos findContactByName(String name) {
         Contactos searchContact = new Contactos(name, "0", "placeholder@email.com");
-        SimpleList<Contactos> orderedContacts = contacts.inOrder();
-
-        for (int i = 0; i < orderedContacts.size(); i++) {
-            Contactos current = orderedContacts.get(i);
-
-            if (current.compareTo(searchContact) == 0) {
-                return current;
-            }
-        }
-
-        return null;
+        return contacts.find(searchContact);
     }
-
     private String readNonEmptyText(String message) {
         String input;
 
