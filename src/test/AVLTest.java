@@ -1,8 +1,8 @@
 package test;
 
-import listModule.SimpleList;
-import treeContactos.Contactos;
-import treeModule.AVL;
+import tp02.tp03.listModule.SimpleList;
+import tp08.tp09.treeContactos.Contactos;
+import tp08.tp09.treeContactos.treeModule.AVL;
 
 public class AVLTest {
 

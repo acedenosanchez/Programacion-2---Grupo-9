@@ -1,9 +1,15 @@
 package test;
 
-import listModule.*;
-import stackModule.*;
-import queueModule.*;
 import org.junit.jupiter.api.Test;
+import tp02.tp03.listModule.SimpleArrayList;
+import tp02.tp03.listModule.SimpleLinkedList;
+import tp02.tp03.listModule.SimpleList;
+import tp04.queueModule.SimpleArrayQueue;
+import tp04.queueModule.SimpleLinkedQueue;
+import tp04.queueModule.SimpleQueue;
+import tp04.stackModule.SimpleArrayStack;
+import tp04.stackModule.SimpleLinkedStack;
+import tp04.stackModule.SimpleStack;
 
 import java.util.NoSuchElementException;
 
