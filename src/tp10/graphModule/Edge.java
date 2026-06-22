@@ -12,18 +12,23 @@ public class Edge<T> {
 
     public boolean equals(Object other) {
 
+        if (other == null) {
+            return false;
+        }
+
         //Si el otro objeto ni siquiera es un Edge no es igual
         if(other.getClass() != this.getClass()) {
             return false;
         }
 
         //Ahora que se puede casteamos
-        Edge<T> otherEdge = (Edge<T>)other;
+        Edge<T> otherEdge = (Edge<T>) other;
 
         //Sino rienen el mismo destino, no es el mismo edge
-        if(otherEdge.to != to) return false;
+        if (!otherEdge.to.equals(to)) {
+            return false;
+        }
 
-
-        return false;
+        return true;
     }
 }

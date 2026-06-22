@@ -5,13 +5,11 @@ import tp02.tp03.listModule.SimpleArrayList;
 import tp02.tp03.listModule.SimpleList;
 
 public class ListGraph<T> implements Graph<T> {
-   private SimpleArrayDictionary <T, SimpleList<Edge<T>>> adjencyList;
+    private SimpleArrayDictionary<T, SimpleList<Edge<T>>> adjencyList;
 
-
-   public ListGraph() {
-       adjencyList = new SimpleArrayDictionary<T , SimpleList<Edge<T>>>();
-   }
-
+    public ListGraph() {
+        adjencyList = new SimpleArrayDictionary<T, SimpleList<Edge<T>>>();
+    }
 
     @Override
     public SimpleList<T> vertices() {
@@ -20,77 +18,84 @@ public class ListGraph<T> implements Graph<T> {
 
     @Override
     public boolean addVertex(T vertex) {
-       if(adjencyList.containsKey(vertex)) {return false;}
+        if (adjencyList.containsKey(vertex)) {
+            return false;
+        }
 
-       adjencyList.put(vertex,new SimpleArrayList<Edge<T>>());
-        return false;
+        adjencyList.put(vertex, new SimpleArrayList<Edge<T>>());
+        return true;
     }
 
     @Override
     public boolean removeVertex(T vertex) {
-       //No podemos remocer si no existe de antes
-        if(!adjencyList.containsKey(vertex)) {return false;}
+        if (!adjencyList.containsKey(vertex)) {
+            return false;
+        }
 
-        //Creamos una lista con los vertices
         SimpleList<T> vertices = vertices();
-        int size = size();
+        int totalVertices = vertices.size();
 
-        //Recorremos el arreglo y eliminamos los edges que vayan del vertice A al vertice que querramos eliminar
-        for(int i=0; i<size; i++) {
+        for (int i = 0; i < totalVertices; i++) {
             removeEdge(vertices.get(i), vertex);
         }
-        return false;
+
+        adjencyList.remove(vertex);
+        return true;
     }
 
     @Override
     public boolean addEdge(T from, T to, int weight) {
-       //addVertex ya chequea si existen
-       addVertex(from);
-       addVertex(to);
+        addVertex(from);
+        addVertex(to);
 
-       Edge<T> edge = getEdge(from,to);
+        Edge<T> edge = getEdge(from, to);
 
-       //Si no existe el edge
-       if(edge==null) {
-           //Agregamos al vertice el nuevo edge
-           adjencyList.get(from).add(new Edge<T>(to,weight));
-           return true;
-       }
+        if (edge == null) {
+            adjencyList.get(from).add(new Edge<T>(to, weight));
+            return true;
+        }
 
-       //si existe pero tiene otro weigth , actualizamos
-       if(edge.weight != weight) {
-           edge.weight = weight;
-           return true;
-       }
+        if (edge.weight != weight) {
+            edge.weight = weight;
+            return true;
+        }
 
-        //sin cambios
         return false;
     }
 
-
-
     @Override
     public boolean removeEdge(T from, T to) {
-       if(!adjencyList.containsKey(from) ||
-        !adjencyList.containsKey(to)) return false;
+        if (!adjencyList.containsKey(from) || !adjencyList.containsKey(to)) {
+            return false;
+        }
 
-       //Buscamos todas las aristas que van desde From
-       SimpleList<Edge<T>> edges = adjencyList.get(from);
+        SimpleList<Edge<T>> edges = adjencyList.get(from);
 
-       //Si la arista va a to, la removemos
-       for(int i=0; i< edges.size(); i++)
-           if(edges.get(i).to.equals(to)) {
-               edges.remove(i);
-               return true;
-           }
+        for (int i = 0; i < edges.size(); i++) {
+            if (edges.get(i).to.equals(to)) {
+                edges.remove(i);
+                return true;
+            }
+        }
 
-       //Sin cambios
         return false;
     }
 
     @Override
     public SimpleList<T> getNeighbors(T vertex) {
-        return null;
+        SimpleArrayList<T> neighbors = new SimpleArrayList<T>();
+
+        if (!adjencyList.containsKey(vertex)) {
+            return neighbors;
+        }
+
+        SimpleList<Edge<T>> edges = adjencyList.get(vertex);
+
+        for (int i = 0; i < edges.size(); i++) {
+            neighbors.add(edges.get(i).to);
+        }
+
+        return neighbors;
     }
 
     @Override
@@ -105,10 +110,12 @@ public class ListGraph<T> implements Graph<T> {
 
     @Override
     public int getWeight(T from, T to) {
-       Edge<T> edge = getEdge(from, to);
+        Edge<T> edge = getEdge(from, to);
 
-       //Si no esta la arista, devolvemos un valor invalido
-        if(edge == null) return -1;
+        if (edge == null) {
+            return -1;
+        }
+
         return edge.weight;
     }
 
@@ -127,16 +134,33 @@ public class ListGraph<T> implements Graph<T> {
         return adjencyList.isEmpty();
     }
 
+    public void printGraph() {
+        SimpleList<T> vertices = vertices();
+
+        for (int i = 0; i < vertices.size(); i++) {
+            T from = vertices.get(i);
+            SimpleList<Edge<T>> edges = adjencyList.get(from);
+
+            for (int j = 0; j < edges.size(); j++) {
+                Edge<T> edge = edges.get(j);
+                System.out.println(from + " -> " + edge.to + ": " + edge.weight);
+            }
+        }
+    }
+
     private Edge<T> getEdge(T from, T to) {
+        if (!containsVertex(from) || !containsVertex(to)) {
+            return null;
+        }
 
-       if(!containsVertex(from) || !containsVertex(to)) return null;
+        SimpleList<Edge<T>> edges = adjencyList.get(from);
 
-       SimpleList <Edge<T>> edges = adjencyList.get(from);
-       int edgeSize = edges.size();
+        for (int i = 0; i < edges.size(); i++) {
+            if (edges.get(i).to.equals(to)) {
+                return edges.get(i);
+            }
+        }
 
-       for(int i = 0; i < edgeSize; i++) {
-           if(edges.get(i).to.equals(to)) return edges.get(i);
-       }
-    return null;
+        return null;
     }
 }
