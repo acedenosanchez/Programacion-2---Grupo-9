@@ -21,6 +21,9 @@ public class GpsApp {
     public void start() {
         int option = -1;
 
+        System.out.println("Mapa cargado inicialmente:");
+        printMap();
+
         while (option != 0) {
             printMenu();
             option = readInteger();

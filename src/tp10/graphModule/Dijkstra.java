@@ -1,4 +1,5 @@
 package tp10.graphModule;
+
 import tp02.tp03.listModule.SimpleArrayList;
 import tp02.tp03.listModule.SimpleList;
 import tp07.dictionary.SimpleArrayDictionary;
@@ -17,7 +18,6 @@ public class Dijkstra {
         for (int i = 0; i < vertices.size(); i++) {
             String vertex = vertices.get(i);
             distances.put(vertex, INFINITY);
-            previous.put(vertex, null);
             unvisited.add(vertex);
         }
 
@@ -43,6 +43,11 @@ public class Dijkstra {
 
                 int currentDistance = distances.get(current);
                 int edgeWeight = graph.getWeight(current, neighbor);
+
+                if (currentDistance == INFINITY || edgeWeight < 0) {
+                    continue;
+                }
+
                 int newDistance = currentDistance + edgeWeight;
 
                 if (newDistance < distances.get(neighbor)) {
@@ -59,6 +64,7 @@ public class Dijkstra {
         }
 
         SimpleList<String> path = buildPath(previous, origin, destination);
+
         return new Gps(path, finalDistance);
     }
 
@@ -107,7 +113,11 @@ public class Dijkstra {
                 break;
             }
 
-            current = previous.get(current);
+            if (!previous.containsKey(current)) {
+                current = null;
+            } else {
+                current = previous.get(current);
+            }
         }
 
         SimpleArrayList<String> path = new SimpleArrayList<String>();
