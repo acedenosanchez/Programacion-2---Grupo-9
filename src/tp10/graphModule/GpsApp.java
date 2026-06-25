@@ -1,6 +1,4 @@
 package tp10.graphModule;
-
-import tp10.graphModule.ListGraph;
 import tp02.tp03.listModule.SimpleList;
 
 import java.util.Scanner;
@@ -87,20 +85,40 @@ public class GpsApp {
     }
 
     private void calculateShortestPath() {
-        System.out.print("Ingresá origen: ");
-        String origin = scanner.nextLine();
+        String origin;
 
-        System.out.print("Ingresá destino: ");
-        String destination = scanner.nextLine();
+        while (true) {
+            System.out.print("Ingresá origen (0 para cancelar): ");
+            origin = scanner.nextLine().trim();
 
-        if (!map.containsVertex(origin)) {
-            System.out.println("El origen no existe en el mapa.");
-            return;
+            if (origin.equals("0")) {
+                System.out.println("Operación cancelada.");
+                return;
+            }
+
+            if (map.containsVertex(origin)) {
+                break;
+            }
+
+            System.out.println("El origen no existe en el mapa. Ingresá un origen válido.");
         }
 
-        if (!map.containsVertex(destination)) {
-            System.out.println("El destino no existe en el mapa.");
-            return;
+        String destination;
+
+        while (true) {
+            System.out.print("Ingresá destino (0 para cancelar): ");
+            destination = scanner.nextLine().trim();
+
+            if (destination.equals("0")) {
+                System.out.println("Operación cancelada.");
+                return;
+            }
+
+            if (map.containsVertex(destination)) {
+                break;
+            }
+
+            System.out.println("El destino no existe en el mapa. Ingresá un destino válido.");
         }
 
         Gps result = dijkstra.shortestPath(map, origin, destination);

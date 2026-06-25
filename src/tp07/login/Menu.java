@@ -70,31 +70,53 @@ public class Menu {
 
     private void login() {
         System.out.println("\nInicio de sesión");
-        String username = readText("Ingrese usuario: ");
-        String password = readText("Ingrese contraseña: ");
+
+        if (logic.amountOfUsers() == 0) {
+            System.out.println("No hay usuarios registrados. Primero debe registrar un usuario.");
+            return;
+        }
+
+        String username = readText("Ingrese usuario: ").trim();
 
         try {
+            if (!logic.userExists(username)) {
+                System.out.println("El usuario no existe.");
+                return;
+            }
+
+            if (logic.isBlocked(username)) {
+                System.out.println("La cuenta se encuentra bloqueada. No se puede ingresar.");
+                return;
+            }
+
+            String password = readText("Ingrese contraseña: ").trim();
+
             LoginResult result = logic.login(username, password);
 
             switch (result) {
                 case SUCCESS:
                     System.out.println("Login exitoso. Bienvenido, " + username + ".");
                     break;
-                case USER_NOT_FOUND:
-                    System.out.println("El usuario no existe.");
-                    break;
+
                 case WRONG_PASSWORD:
                     System.out.println("Contraseña incorrecta.");
                     System.out.println("Intentos restantes: " + logic.getRemainingAttempts(username));
                     break;
+
                 case BLOCKED_BY_ATTEMPTS:
                     System.out.println("Contraseña incorrecta.");
                     System.out.println("La cuenta fue bloqueada por superar los 3 intentos incorrectos.");
                     break;
+
                 case BLOCKED_USER:
                     System.out.println("La cuenta se encuentra bloqueada. No se puede ingresar.");
                     break;
+
+                case USER_NOT_FOUND:
+                    System.out.println("El usuario no existe.");
+                    break;
             }
+
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }

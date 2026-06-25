@@ -18,7 +18,6 @@ public class Logic {
         users = new SimpleLinkedDictionary<>();
         failedAttempts = new SimpleLinkedDictionary<>();
         blockedUsers = new SimpleLinkedDictionary<>();
-        loadDefaultUsers();
     }
 
     public boolean registerUser(String username, String password) {
@@ -106,11 +105,6 @@ public class Logic {
 
     public SimpleList<String> getUsers() {
         return users.keys();
-    }
-
-    // Métodos de servicio
-    private void loadDefaultUsers() {
-        registerUser("admin", "1234");
     }
 
     private void increaseFailedAttempts(String username) {
