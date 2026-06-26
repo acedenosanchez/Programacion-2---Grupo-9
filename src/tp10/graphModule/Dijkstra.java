@@ -51,7 +51,9 @@ public class Dijkstra {
                 int newDistance = currentDistance + edgeWeight;
 
                 if (newDistance < distances.get(neighbor)) {
+                    //Actualiza la distancia más corta.
                     distances.put(neighbor, newDistance);
+                    //Actualiza el camino más corto.
                     previous.put(neighbor, current);
                 }
             }
@@ -68,6 +70,7 @@ public class Dijkstra {
         return new Gps(path, finalDistance);
     }
 
+    //Metodo de servicio
     private String getVertexWithMinimumDistance(
             SimpleList<String> unvisited,
             SimpleArrayDictionary<String, Integer> distances

@@ -21,7 +21,7 @@ public class BST<E extends Comparable<E>> {
             size++;
             return new TreeNode<E>(value);
         }
-
+        // Devuelve -1 si es menor, 1 si es mayor en la comparación de nuevo valor con ultimo.
         int comparison = value.compareTo(current.value);
 
         if (comparison < 0) {

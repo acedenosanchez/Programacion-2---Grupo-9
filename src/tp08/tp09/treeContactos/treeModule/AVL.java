@@ -79,14 +79,17 @@ public class AVL<E extends Comparable<E>> extends BST<E> {
     private TreeNode<E> rebalance(TreeNode<E> current) {
         int balance = getBalance(current);
 
+        // LL
         if (balance > 1) {
+            //LR
             if (getBalance(current.left) < 0) {
                 current.left = rotateLeft(current.left);
             }
             return rotateRight(current);
         }
-
+        //RR
         if (balance < -1) {
+            //RL
             if (getBalance(current.right) > 0) {
                 current.right = rotateRight(current.right);
             }
@@ -110,9 +113,11 @@ public class AVL<E extends Comparable<E>> extends BST<E> {
     }
 
     private TreeNode<E> rotateLeft(TreeNode<E> unbalancedNode) {
+        //Antes
         TreeNode<E> newRoot = unbalancedNode.right;
         TreeNode<E> movedSubTree = newRoot.left;
 
+        //Dsps
         newRoot.left = unbalancedNode;
         unbalancedNode.right = movedSubTree;
 
