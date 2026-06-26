@@ -67,6 +67,7 @@ public class TicketHandler {
         Ticket ticket = new Ticket(title, description, urgency, nextTicketNumber, "Abierto");
         nextTicketNumber++;
 
+        //Transforma Urgency level a Int para mantener la estructura de la cola de prioridad por numeros
         queue.enqueue(ticket, priorityToNumber(urgency));
         System.out.println("Reporte creado correctamente.");
     }
@@ -113,7 +114,7 @@ public class TicketHandler {
                     unresolvedTickets.enqueue(ticket);
                 }
                 case "3" -> {
-                    //El ticket que se visualizó entra a la estructura auxiliar.
+                    //El ticket que se visualizó entra a la estructura auxiliar y avanzamos con el siguiente.
                     unresolvedTickets.enqueue(ticket);
 
                     if (queue.isEmpty()) {
@@ -121,7 +122,7 @@ public class TicketHandler {
                         StillWatching = false;
                     }
                 }
-                case "4" -> {
+                case "4" -> { //Se devuelve el ticket a la cola de prioridad y se vuelve al menu
                     unresolvedTickets.enqueue(ticket);
                     StillWatching = false;
                 }

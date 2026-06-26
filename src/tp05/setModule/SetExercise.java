@@ -39,6 +39,7 @@ public class SetExercise extends Exercise {
         }
     }
 
+    //Visualización
     private String setToString(SimpleSet<String> set) {
         String result = "";
         Object[] elements = set.toArray();

@@ -107,6 +107,8 @@ public class Logic {
         return users.keys();
     }
 
+
+    //Métodos de servicio
     private void increaseFailedAttempts(String username) {
         int currentAttempts = failedAttempts.get(username);
         int newAttempts = currentAttempts + 1;

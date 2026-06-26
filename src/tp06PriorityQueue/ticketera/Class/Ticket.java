@@ -6,7 +6,6 @@ public class Ticket {
     private String description;
     private UrgencyLevel urgency;
     private int number;
-    private String assignee;
     private String state;
 
     public enum UrgencyLevel {
@@ -17,6 +16,7 @@ public class Ticket {
 
         private final String displayName;
 
+        //Constructor
         UrgencyLevel(String displayName) {
             this.displayName = displayName;
         }
@@ -30,6 +30,7 @@ public class Ticket {
                 throw new IllegalArgumentException("La opción de urgencia no puede ser nula.");
             }
 
+            //setter
             return switch (option.trim()) {
                 case "1" -> CRITICO;
                 case "2" -> ALTO;
@@ -40,6 +41,7 @@ public class Ticket {
         }
     }
 
+    //Constructor de ticket
     public Ticket(String title, String description, UrgencyLevel urgency, int number, String state) {
         if (title == null || title.trim().isEmpty()) {
             throw new IllegalArgumentException("El título no puede estar vacío.");
@@ -82,9 +84,6 @@ public class Ticket {
         return number;
     }
 
-    public String getAssignee() {
-        return assignee;
-    }
 
     public String getState() {
         return state;
