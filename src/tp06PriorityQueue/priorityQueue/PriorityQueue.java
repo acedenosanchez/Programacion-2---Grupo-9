@@ -1,4 +1,4 @@
-package tp06.priorityQueue;
+package tp06PriorityQueue.priorityQueue;
 
 public interface PriorityQueue <E> {
     public void enqueue (E elem , int priority);

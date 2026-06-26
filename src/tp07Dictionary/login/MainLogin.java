@@ -1,4 +1,4 @@
-package tp07.login;
+package tp07Dictionary.login;
 
 public class MainLogin {
     public static void main(String[] args) {

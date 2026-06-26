@@ -1,8 +1,8 @@
-package tp06.ticketera.Console;
+package tp06PriorityQueue.ticketera.Console;
 
 
 
-import tp06.ticketera.Service.TicketHandler;
+import tp06PriorityQueue.ticketera.Service.TicketHandler;
 
 import java.util.Scanner;
 

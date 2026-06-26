@@ -1,4 +1,4 @@
-package tp06.priorityQueue;
+package tp06PriorityQueue.priorityQueue;
 
 public class SimpleArrayPriorityQueue<E> implements PriorityQueue<E> {
 

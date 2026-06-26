@@ -1,6 +1,6 @@
-package tp07.login;
+package tp07Dictionary.login;
 
-import tp07.dictionary.SimpleLinkedDictionary;
+import tp07Dictionary.dictionary.SimpleLinkedDictionary;
 import tp02.tp03.listModule.SimpleList;
 
 public class Logic {

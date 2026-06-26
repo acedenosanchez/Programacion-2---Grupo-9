@@ -1,4 +1,4 @@
-package tp07.dictionary;
+package tp07Dictionary.dictionary;
 
 import tp02.tp03.listModule.SimpleList;
 

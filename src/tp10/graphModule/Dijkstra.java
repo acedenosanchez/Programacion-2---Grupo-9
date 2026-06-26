@@ -2,7 +2,7 @@ package tp10.graphModule;
 
 import tp02.tp03.listModule.SimpleArrayList;
 import tp02.tp03.listModule.SimpleList;
-import tp07.dictionary.SimpleArrayDictionary;
+import tp07Dictionary.dictionary.SimpleArrayDictionary;
 
 public class Dijkstra {
 

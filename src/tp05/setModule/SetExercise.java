@@ -11,6 +11,7 @@ public class SetExercise extends Exercise {
     private SimpleSet<String> setB;
     private SimpleSet<String> selectedSet;
 
+    //Constructor
     public SetExercise(Scanner scnr) {
         super(scnr);
         setA = new SimpleArraySet<String>();

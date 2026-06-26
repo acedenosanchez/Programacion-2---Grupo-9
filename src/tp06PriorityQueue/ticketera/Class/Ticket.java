@@ -1,4 +1,4 @@
-package tp06.ticketera.Class;
+package tp06PriorityQueue.ticketera.Class;
 
 public class Ticket {
 

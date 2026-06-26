@@ -1,4 +1,4 @@
-package tp07.login;
+package tp07Dictionary.login;
 
 public enum LoginResult {
     SUCCESS,

@@ -1,4 +1,4 @@
-package tp07.login;
+package tp07Dictionary.login;
 
 import java.util.Scanner;
 import tp02.tp03.listModule.SimpleList;

@@ -1,8 +1,8 @@
-package tp06.ticketera.Service;
+package tp06PriorityQueue.ticketera.Service;
 
-import tp06.ticketera.Class.Ticket;
+import tp06PriorityQueue.ticketera.Class.Ticket;
 import tp02.tp03.listModule.SimpleLinkedList;
-import tp06.priorityQueue.SimpleLinkedPriorityQueue;
+import tp06PriorityQueue.priorityQueue.SimpleLinkedPriorityQueue;
 import tp04.queueModule.SimpleLinkedQueue;
 import tp04.queueModule.SimpleQueue;
 

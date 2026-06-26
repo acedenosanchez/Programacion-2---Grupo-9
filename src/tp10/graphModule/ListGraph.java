@@ -1,6 +1,6 @@
 package tp10.graphModule;
 
-import tp07.dictionary.SimpleArrayDictionary;
+import tp07Dictionary.dictionary.SimpleArrayDictionary;
 import tp02.tp03.listModule.SimpleArrayList;
 import tp02.tp03.listModule.SimpleList;
 
